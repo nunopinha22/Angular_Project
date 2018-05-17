@@ -1,13 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<div class="page">
+  <div class="interactions">
+    <h1>Code challenge</h1>
+    <br />
+    <!-- <Search value={searchTerm} onChange={this.onSearchTermChange} onSubmit={(event)=> this.fetchSearchTopStories(searchTerm, 0, event)} > Search text
+    </Search> -->
+    <search-component (searchText)="searchInCatalogs($event)"></search-component>
+    <br />
+    <div *ngIf="catalog">
+      <table-component [records]="catalog">
+      </table-component>
+    </div>
 
-  <div *ngIf="catalog">
-    <ng-template ngFor let-record [ngForOf]="catalog.productHierarchy[0].items">
-      <p><strong>Entrega Normal</strong></p>
-      <p>Em até {{record.code}} dias úteis</p>
-    </ng-template>
+    <!-- <div className="interactions">
+        <Button onClick={(event) => this.fetchSearchTopStories(searchTerm, page + 1, event)}>
+          More
+        </Button>
+      </div> -->
   </div>
 </div>

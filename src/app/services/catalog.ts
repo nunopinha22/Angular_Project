@@ -18,6 +18,6 @@ export class CatalogService {
 
                 return result;
             })
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            // .do(data => console.log('All: ' + JSON.stringify(data)))
     }
 }
