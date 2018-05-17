@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent, FilterPipe } from './app.component';
 import { TableComponent } from './components/table.component';
 import { SearchComponent } from './components/search.component';
+
 
 import { CatalogService } from './services/catalog';
 import { HttpModule } from '@angular/http';
@@ -12,17 +13,22 @@ import { HttpModule } from '@angular/http';
   declarations: [
     AppComponent,
     TableComponent,
-    SearchComponent
+    SearchComponent,
+    FilterPipe
   ],
   exports: [
     TableComponent,
-    SearchComponent
+    SearchComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     HttpModule
   ],
-  providers: [CatalogService],
+  providers: [
+    CatalogService,
+    FilterPipe
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

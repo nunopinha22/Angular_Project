@@ -3,19 +3,11 @@
   <div class="interactions">
     <h1>Code challenge</h1>
     <br />
-    <!-- <Search value={searchTerm} onChange={this.onSearchTermChange} onSubmit={(event)=> this.fetchSearchTopStories(searchTerm, 0, event)} > Search text
-    </Search> -->
     <search-component (searchText)="searchInCatalogs($event)"></search-component>
     <br />
-    <div *ngIf="catalog">
-      <table-component [records]="catalog">
+    <div *ngIf="catalogList">
+      <table-component [records]="catalogList" [searchText]="searchTerm">
       </table-component>
     </div>
-
-    <!-- <div className="interactions">
-        <Button onClick={(event) => this.fetchSearchTopStories(searchTerm, page + 1, event)}>
-          More
-        </Button>
-      </div> -->
   </div>
 </div>

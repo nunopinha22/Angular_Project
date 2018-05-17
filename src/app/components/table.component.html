@@ -10,7 +10,7 @@
             Description
         </span>
     </div>
-    <ng-template ngFor let-record [ngForOf]="records">
+    <ng-template ngFor let-record [ngForOf]="records | filter:{Text:searchText}">
         <div class="table-row">
             <span style='width: 30%;'>{{record.code}}</span>
             <span style='width: 30%;'>{{record.name}}</span>
