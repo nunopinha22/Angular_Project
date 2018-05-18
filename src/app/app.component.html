@@ -1,13 +1,1 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="page">
-  <div class="interactions">
-    <h1>Code challenge</h1>
-    <br />
-    <search-component (searchText)="searchInCatalogs($event)"></search-component>
-    <br />
-    <div *ngIf="catalogList">
-      <table-component [records]="catalogList" [searchText]="searchTerm">
-      </table-component>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { Catalog } from '../models/catalog';
 
 @Component({
@@ -20,6 +20,19 @@ export class TableComponent {
      */
     @Input() protected searchText: any[];
 
+    @Output('record-detail')
+    protected recordDetailEmitter = new EventEmitter();
+
     constructor() { }
+
+    /**
+     * This method emit the record to is detail.
+     * @param event - The event of click.
+     * @param record - The record to emit.
+     */
+    public detailRecord(event: Event, record: Catalog): void {
+        // this.stopPropagation(event);
+        this.recordDetailEmitter.emit(record);
+    }
 
 }
