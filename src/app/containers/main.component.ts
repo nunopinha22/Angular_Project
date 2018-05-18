@@ -56,7 +56,6 @@ export class MainComponent implements OnInit {
      * @param obj
      */
     public detail(obj: Catalog): void {
-        console.log("Entrei", obj.code);
-        this.router.navigate(['../detail'], { relativeTo: this.route });
+        this.router.navigate(['../detail', obj.code], { relativeTo: this.route });
     }
 }

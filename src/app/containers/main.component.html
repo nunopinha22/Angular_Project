@@ -6,7 +6,7 @@
     </div>
     <br />
     <div *ngIf="catalogList">
-        <table-component [records]="catalogList" [searchText]="searchTerm" (record-detail)="detail($event)">
+        <table-component [records]="catalogList" [searchText]="searchTerm" [hasFilter]=true (record-detail)="detail($event)">
         </table-component>
     </div>
 </div>

@@ -1,3 +1,23 @@
-<div>
-    Detail page
+<div class="page">
+    <div class="interactions">
+        <h1>Detail page</h1>
+    </div>
+    <br />
+    <div *ngIf="catalogItem">
+        <div class="div-block">
+            <h4 class="div-inline">Description: </h4>
+            <span class="div-inline">{{catalogItem.description}}</span>
+        </div>
+        <div class="div-block">
+            <h4 class="div-inline">Code: </h4>
+            <span class="div-inline">{{catalogItem.code}}</span>
+        </div>
+        <div class="div-block">
+            <h4 class="div-inline">Name: </h4>
+            <span class="div-inline">{{catalogItem.name}}</span>
+        </div>
+
+        <table-component [records]="catalogItem.ProductOfferPrice" [hasFilter]=false >
+        </table-component>
+    </div>
 </div>

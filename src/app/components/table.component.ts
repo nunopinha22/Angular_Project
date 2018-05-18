@@ -11,9 +11,14 @@ import { Catalog } from '../models/catalog';
 export class TableComponent {
 
     /**
+     * Set filter in table.
+     */
+    @Input() protected hasFilter: boolean;
+
+    /**
      * Set records for table.
      */
-    @Input() protected records: Catalog[];
+    @Input() protected records: any[];
 
     /**
      * Set filter text.
@@ -31,7 +36,6 @@ export class TableComponent {
      * @param record - The record to emit.
      */
     public detailRecord(event: Event, record: Catalog): void {
-        // this.stopPropagation(event);
         this.recordDetailEmitter.emit(record);
     }
 

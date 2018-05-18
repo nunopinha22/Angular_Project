@@ -1,0 +1,16 @@
+.page {
+    margin: 20px;
+}
+
+.interactions {
+    text-align: center;
+}
+
+.div-block {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.div-inline {
+    display: inline;
+}
