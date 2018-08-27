@@ -1,0 +1,15 @@
+<div class="page">
+    <div class="interactions">
+        <h1>Code challenge</h1>
+        <br/>    
+        <search-component (searchText)="searchInCatalogs($event)"></search-component>
+    </div>
+    <br />
+    <div>
+        <table-component [records]="notes$ | async" 
+                         [searchText]="searchTerm" 
+                         [hasFilter]=true
+                         (onDeleteRecord)="deleteRecord($event)">
+        </table-component>
+    </div>
+</div>

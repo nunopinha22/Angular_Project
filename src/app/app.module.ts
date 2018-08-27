@@ -1,43 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { MainComponent, FilterPipe } from './containers/main.component';
-import { TableComponent } from './components/table.component';
-import { SearchComponent } from './components/search.component';
-import { DetailComponent } from './containers/detail.component'
+import { NgModule } from '@angular/core';
+import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
 
-import { CatalogService } from './services/catalog';
-import { HttpModule } from '@angular/http';
+// REDUX
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import { appReducers, AppState } from './app.reducer';
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  const localStorage = localStorageSync({ rehydrate: true, keys: ['main'] })(reducer);
+  return localStorage;
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MainComponent,
-    TableComponent,
-    SearchComponent,
-    DetailComponent,
-    FilterPipe
-  ],
-  exports: [
-    MainComponent,
-    TableComponent,
-    SearchComponent,
-    DetailComponent,
-    FilterPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([]),
+    AppRoutingModule,
+    StoreModule.forRoot(appReducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
-  providers: [
-    CatalogService,
-    FilterPipe
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

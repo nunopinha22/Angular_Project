@@ -1,7 +1,12 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { Catalog } from '../models/catalog';
-import { CatalogService } from '../services/catalog';
+import { Catalog } from './models/catalog';
+import { CatalogService } from './services/catalog';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import * as Actions from './actions/user-notes.action';
+import * as fromNotes from './main.reducers';
+import { Observable } from 'rxjs';
 
 /**
  * Pipe to filter text inputed by user.
@@ -12,9 +17,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FilterPipe implements PipeTransform {
     transform(items: any, filter: any): any {
         if (filter && Array.isArray(items)) {
-            return items.filter(x => x.code.toLowerCase().includes(filter.Text.toLowerCase())
-                || x.name.toLowerCase().includes(filter.Text.toLowerCase())
-                || x.description.toLowerCase().includes(filter.Text.toLowerCase()));
+            return items.filter(x => x.content.toLowerCase().includes(filter.Text.toLowerCase())
+                || x.title.toLowerCase().includes(filter.Text.toLowerCase()));
         } else {
             return items;
         }
@@ -30,17 +34,18 @@ export class FilterPipe implements PipeTransform {
 export class MainComponent implements OnInit {
     title = 'app';
     private searchTerm: string = '';
-    private catalogList: Catalog[];
+    private notes$: Observable<any[]>;
 
     constructor(
-        private _catalogService: CatalogService,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        private appStore: Store<fromNotes.MainState>) { 
+
+            this.appStore.dispatch(new Actions.GetAllNotes());
+         }
 
     ngOnInit() {
-        this._catalogService.getCatalogList()
-            .subscribe((data: any) => this.catalogList = data.productHierarchy[0].items,
-                error => console.log(error));
+        this.notes$ = this.appStore.select(fromNotes.getNotes);
     }
 
     /**
@@ -57,5 +62,10 @@ export class MainComponent implements OnInit {
      */
     public detail(obj: Catalog): void {
         this.router.navigate(['../detail', obj.code], { relativeTo: this.route });
+    }
+
+    deleteRecord(id: number){
+        console.log('delete record Container', id);
+        this.appStore.dispatch(new Actions.DeleteUserNote(id));
     }
 }

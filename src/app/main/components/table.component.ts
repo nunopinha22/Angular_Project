@@ -1,5 +1,5 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Catalog } from '../models/catalog';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Notes } from '../models/notes.data';
 
 @Component({
     selector: 'table-component',
@@ -8,7 +8,7 @@ import { Catalog } from '../models/catalog';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TableComponent {
+export class TableComponent implements OnChanges {
 
     /**
      * Set filter in table.
@@ -25,18 +25,34 @@ export class TableComponent {
      */
     @Input() protected searchText: any[];
 
-    @Output('record-detail')
-    protected recordDetailEmitter = new EventEmitter();
+    @Output() onDeleteRecord = new EventEmitter();
 
+    note: Notes;
+    viewNote: Boolean = false;
+    
     constructor() { }
+
+    public ngOnChanges(){
+    }
 
     /**
      * This method emit the record to is detail.
      * @param event - The event of click.
      * @param record - The record to emit.
      */
-    public detailRecord(event: Event, record: Catalog): void {
-        this.recordDetailEmitter.emit(record);
+    public detailRecord(e, record?: Notes): void {
+        e.preventDefault();
+        this.note = record;
+        this.viewNote = !this.viewNote;
     }
+
+    deleteNote(e): void {
+        this.onDeleteRecord.emit(e);
+        this.viewNote = !this.viewNote;
+    }
+
+
+
+
 
 }

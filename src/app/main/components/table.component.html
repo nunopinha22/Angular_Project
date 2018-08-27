@@ -1,0 +1,29 @@
+<div class="table">
+    <div class="table-header">
+        <span style='width: 20%;'>
+            Title
+        </span>
+        <span style='width: 70%;'>
+            Content
+        </span>
+        <span style='width: 10%;'>
+        </span>
+    </div>
+
+    <ng-template *ngIf="hasFilter" ngFor let-record [ngForOf]="records | filter:{Text:searchText}">
+        <div class="table-row">
+            <span style='width: 20%;'>{{record.title}}</span>
+            <span style='width: 70%;'>{{record.content}}</span>
+            <span style='width: 10%;'>
+                <button style="float:right;" (click)="detailRecord($event, record)">Detail</button>
+            </span>
+        </div>
+    </ng-template>
+
+    <detail-note
+        *ngIf="viewNote"
+        [detailNote]="note"
+        (onView)="detailRecord($event)"
+        (onDelete)="deleteNote($event)"
+    ></detail-note>
+</div>

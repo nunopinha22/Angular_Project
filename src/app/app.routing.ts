@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { MainComponent } from './containers/main.component';
-import { DetailComponent } from './containers/detail.component';
+
+import {MainModule} from './main/main.module'
+// ROUTING
+export const AppRoutes = {
+    MAIN: 'main',
+};
 
 const Paths: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
-    { path: 'main', component: MainComponent },
-    { path: 'detail/:code', component: DetailComponent }
+    { path: 'main', loadChildren: './main/main.module#MainModule' }
 ];
 
 @NgModule({
