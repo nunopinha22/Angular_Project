@@ -1,6 +1,6 @@
 export class Notes {
-    id: number;
-    title: string;
-    content: string;
-  }
-  
+  id: number;
+  time: Date;
+  title: string;
+  content: string;
+}

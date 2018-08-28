@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export const ActionTypes = {
     GET_NOTES: '[UserNotes] Get Notes',
     GET_NOTES_SUCCESS: '[UserNotes] Get Notes Success',
+    GET_NOTES_SORT: '[UserNotes] Get Notes Sorted',
     EDIT_NOTE: '[UserNotes] Edit User Notes',
     DELETE_NOTE: '[UserNotes] Delete User Notes',
     INSERT_NOTE: '[UserNotes] Insert User Notes',
@@ -18,6 +19,12 @@ export class GetAllNotes implements Action {
 export class GetAllNotesSuccess implements Action {
     public type = ActionTypes.GET_NOTES_SUCCESS;
     constructor(public payload: any) {
+    }
+}
+
+export class GetAllNotesSorted implements Action {
+    public type = ActionTypes.GET_NOTES_SORT;
+    constructor(public payload: boolean) {
     }
 }
 

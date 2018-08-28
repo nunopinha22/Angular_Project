@@ -27,10 +27,13 @@ export class TableComponent implements OnChanges {
 
     @Output() onDeleteRecord = new EventEmitter();
     @Output() onEditRecord = new EventEmitter();
+    @Output() onSortRecords = new EventEmitter();
 
     note: Notes;
     private editNote: boolean = false;
     private viewNote: Boolean = false;
+    private sortDesc: boolean = false;
+
 
     constructor() { }
 
@@ -93,5 +96,13 @@ export class TableComponent implements OnChanges {
     public editNoteRecord(record): void {
         this.editNote = !this.editNote;
         this.onEditRecord.emit(record);
+    }
+
+    /**
+     * This method emit the event to sort records.
+     */
+    public sortList() {
+        this.sortDesc = !this.sortDesc
+        this.onSortRecords.emit(this.sortDesc);
     }
 }

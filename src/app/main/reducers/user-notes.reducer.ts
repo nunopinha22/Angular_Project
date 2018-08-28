@@ -20,6 +20,7 @@ export function UserNoteReducer(state = initialState, action: Actions.UserNotesA
                 return Object.assign({}, state);
             }
         }
+
         case Actions.ActionTypes.DELETE_NOTE: {
             const newList = state.notes.filter(el => el.id !== action.payload);
             return Object.assign({}, state, {
@@ -38,11 +39,22 @@ export function UserNoteReducer(state = initialState, action: Actions.UserNotesA
             const newState = state.notes;
             newState.unshift({
                 id: action.payload.id,
+                time: action.payload.time,
                 title: action.payload.title,
                 content: action.payload.content,
             })
             return Object.assign({}, state, {
                 notes: Object.assign([], newState)
+            });
+        }
+        case Actions.ActionTypes.GET_NOTES_SORT: {
+            const newList = state.notes.sort((a: any, b: any) => {
+                return action.payload ? (a.time > b.time ? -1 : 1)
+                    : (a.time > b.time ? 1 : -1)
+            });
+
+            return Object.assign({}, state, {
+                notes: Object.assign([], newList)
             });
         }
         default:

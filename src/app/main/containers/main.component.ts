@@ -80,6 +80,14 @@ export class MainComponent implements OnInit {
     }
 
     /**
+     * Action to sort notes.
+     * @param sortDesc
+     */
+    public sortRecords(sortDesc: boolean) {
+        this.appStore.dispatch(new Actions.GetAllNotesSorted(sortDesc));
+    }
+
+    /**
      * This method emit the record to is detail.
      * @param event - The event of click.
      */

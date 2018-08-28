@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'edit-note',
@@ -35,6 +36,7 @@ export class EditableNoteComponent implements OnInit {
         e.preventDefault();
         const obj: Object = {
             id: this.detailNote !== undefined ? this.detailNote.id : new Date().getTime(),
+            time: this.formatDate(),
             title: this.form.value.title,
             content: this.form.value.content
         };
@@ -42,4 +44,8 @@ export class EditableNoteComponent implements OnInit {
         this.onEditNote.emit(obj);
     }
 
+    formatDate(): any {
+        const datePipe = new DatePipe('en-US');
+        return datePipe.transform(new Date().getTime(), 'EEEE, MMMM d');
+    }
 }
