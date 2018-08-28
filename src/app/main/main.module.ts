@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store, ActionReducerMap, StoreModule } from '@ngrx/store';
 
 // COMPONENTS
-import { MainComponent, FilterPipe } from './main.component';
+import { MainComponent, FilterPipe } from './containers/main.component';
 import { TableComponent } from './components/table.component';
 import { SearchComponent } from './components/search.component';
-import { DetailComponent } from './components/modal-note/detail.component'
+import { DetailComponent } from './components/modal-note/detail-note.component'
 import { EditableNoteComponent } from './components/modal-note/editable-note.component'
 
 

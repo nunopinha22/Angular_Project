@@ -1,7 +1,8 @@
 <div class='create_note modal'>
     <form [formGroup]="form" (submit)="editNote($event)">
         <div class="c_n_header modal_header">
-            <span class="title">Edit a note</span>
+            <span *ngIf="detailNote !== undefined" class="title">Edit a note</span>
+            <span *ngIf="detailNote === undefined" class="title">Creat a note</span>
         </div>
         <div class="c_n_middle modal_middle">
             <input type="text" 
@@ -18,7 +19,8 @@
         </div>
         <div class="c_n_bottom modal_bottom">
             <a href="#" class='c_n_cancel sec_btn' (click)="_Toggle($event)">Close</a>
-            <input type="submit" class='c_n_add pri_btn' [disabled]="!form.valid" value='Edit note' />
+            <input type="submit" class='c_n_add pri_btn' [disabled]="!form.valid" 
+                value="Confirm" />
         </div>
     </form>
 </div>

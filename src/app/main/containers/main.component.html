@@ -9,7 +9,7 @@
     <div style='padding-bottom: 5px;'>
         <button class="pri_btn" 
             style="float:right;"  
-            (click)="createRecord($event, record)">Create new note</button>
+            (click)="toogleModal($event, record)">Create new note</button>
     </div>
     <div>
         <table-component [records]="notes$ | async" 
@@ -22,6 +22,6 @@
 
     <edit-note *ngIf="createNote" 
         [detailNote]="note" 
-        (onBack)="closeEdit($event)" 
+        (onBack)="toogleModal($event)" 
         (onEditNote)="createNoteRecord($event)"></edit-note>
 </div>

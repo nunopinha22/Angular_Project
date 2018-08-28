@@ -36,7 +36,6 @@ export function UserNoteReducer(state = initialState, action: Actions.UserNotesA
         }
         case Actions.ActionTypes.INSERT_NOTE: {
             const newState = state.notes;
-            console.log('reducer', action.payload);
             newState.unshift({
                 id: action.payload.id,
                 title: action.payload.title,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // COMPONENTS
-import { MainComponent } from './main.component';
+import { MainComponent } from './containers/main.component';
 
 const MainRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },

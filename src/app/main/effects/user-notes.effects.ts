@@ -19,7 +19,7 @@ export class UserNotesEffects {
     @Effect()
     public getUserServers$: Observable<Action> = this.actions$
         .ofType(moduleActions.ActionTypes.GET_NOTES)
-        .switchMap(() => this._catalogService.getCatalogList()
+        .switchMap(() => this._catalogService.getInitialNotes()
             .map((response: any) => new moduleActions.GetAllNotesSuccess(response))
             .catch((error) => of(new moduleActions.UserNotesFailAction(error)))
         );

@@ -2,10 +2,10 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
-import * as Actions from './actions/user-notes.action';
-import * as fromNotes from './main.reducers';
+import * as Actions from '../actions/user-notes.action';
+import * as fromNotes from '../main.reducers';
 import { Observable } from 'rxjs';
-import { Notes } from './models/notes.data';
+import { Notes } from '../models/notes.data';
 
 /**
  * Pipe to filter text inputed by user.
@@ -32,13 +32,11 @@ export class FilterPipe implements PipeTransform {
 
 export class MainComponent implements OnInit {
     title = 'app';
-    private searchTerm: string = '';
-    private notes$: Observable<any[]>;
+    searchTerm: string = '';
+    notes$: Observable<any[]>;
     private createNote: boolean = false;
 
     constructor(
-        private router: Router,
-        private route: ActivatedRoute,
         private appStore: Store<fromNotes.MainState>) {
 
         this.appStore.dispatch(new Actions.GetAllNotes());
@@ -72,6 +70,10 @@ export class MainComponent implements OnInit {
         this.appStore.dispatch(new Actions.EditUserNote(obj));
     }
 
+    /**
+     * Action to create object.
+     * @param id
+     */
     public createNoteRecord(obj: Object) {
         this.createNote = !this.createNote;
         this.appStore.dispatch(new Actions.InsertUserNote(obj));
@@ -80,18 +82,8 @@ export class MainComponent implements OnInit {
     /**
      * This method emit the record to is detail.
      * @param event - The event of click.
-     * @param record - The record to emit.
      */
-    public createRecord(e): void {
-        e.preventDefault();
-        this.createNote = !this.createNote;
-    }
-
-    /**
-     * This method close the edit.
-     * @param event - The event of click.
-     */
-    public closeEdit(e): void {
+    public toogleModal(e): void {
         e.preventDefault();
         this.createNote = !this.createNote;
     }

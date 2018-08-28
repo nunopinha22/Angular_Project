@@ -2,8 +2,7 @@ import { Component, OnInit, EventEmitter, Output, Input, ChangeDetectionStrategy
 
 @Component({
   selector: 'detail-note',
-  templateUrl: 'detail.component.html',
-  styleUrls: ['./detail.component.css'],
+  templateUrl: 'detail-note.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
