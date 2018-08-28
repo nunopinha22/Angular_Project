@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import {MainModule} from './main/main.module'
 // ROUTING
 export const AppRoutes = {
     MAIN: 'main',

@@ -9,10 +9,10 @@ export class SearchComponent implements OnChanges {
     @Output() private searchText = new EventEmitter();
 
     constructor() {
-     }
+    }
 
-     public ngOnChanges(){
-     }
+    public ngOnChanges() {
+    }
 
     public filterText(event, text: string) {
         this.searchText.emit(text);

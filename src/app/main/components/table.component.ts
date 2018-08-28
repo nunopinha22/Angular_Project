@@ -11,7 +11,7 @@ import { Notes } from '../models/notes.data';
 export class TableComponent implements OnChanges {
 
     /**
-     * Set filter in table.
+     * Set if has filter in table.
      */
     @Input() protected hasFilter: boolean;
 
@@ -26,13 +26,24 @@ export class TableComponent implements OnChanges {
     @Input() protected searchText: any[];
 
     @Output() onDeleteRecord = new EventEmitter();
+    @Output() onEditRecord = new EventEmitter();
 
-    note: Notes;
-    viewNote: Boolean = false;
-    
+    private note: Notes;
+    private editNote: boolean = false;
+    private viewNote: Boolean = false;
+
     constructor() { }
 
-    public ngOnChanges(){
+    public ngOnChanges() {
+    }
+
+    /**
+     * This method close the detail.
+     * @param event - The event of click.
+     */
+    public closeDetail(e): void {
+        e.preventDefault();
+        this.viewNote = !this.viewNote;
     }
 
     /**
@@ -46,13 +57,41 @@ export class TableComponent implements OnChanges {
         this.viewNote = !this.viewNote;
     }
 
-    deleteNote(e): void {
-        this.onDeleteRecord.emit(e);
+    /**
+     * This method close the edit.
+     * @param event - The event of click.
+     */
+    public closeEdit(e): void {
+        e.preventDefault();
+        this.editNote = !this.editNote;
+    }
+
+    /**
+     * This method emit the record to is detail.
+     * @param event - The event of click.
+     * @param record - The record to emit.
+     */
+    public editRecord(e, record?: Notes): void {
+        e.preventDefault();
+        this.note = record;
+        this.editNote = !this.editNote;
+    }
+
+    /**
+     * This method emit the record to be deleted.
+     * @param record - The record to emit.
+     */
+    public deleteNote(record): void {
+        this.onDeleteRecord.emit(record);
         this.viewNote = !this.viewNote;
     }
 
-
-
-
-
+    /**
+     * This method emit the record to be edit.
+     * @param record - The record to emit.
+     */
+    public editNoteRecord(record): void {
+        this.onEditRecord.emit(record);
+        this.editNote = !this.editNote;
+    }
 }

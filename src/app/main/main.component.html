@@ -1,15 +1,27 @@
 <div class="page">
     <div class="interactions">
         <h1>Code challenge</h1>
+        <br/>
         <br/>    
-        <search-component (searchText)="searchInCatalogs($event)"></search-component>
+        <search-component (searchText)="searchInNotes($event)"></search-component>
     </div>
     <br />
+    <div style='padding-bottom: 5px;'>
+        <button class="pri_btn" 
+            style="float:right;"  
+            (click)="createRecord($event, record)">Create new note</button>
+    </div>
     <div>
         <table-component [records]="notes$ | async" 
-                         [searchText]="searchTerm" 
+                         [searchText]="searchTerm"
                          [hasFilter]=true
-                         (onDeleteRecord)="deleteRecord($event)">
+                         (onDeleteRecord)="deleteRecord($event)"
+                         (onEditRecord)="editRecord($event)">
         </table-component>
     </div>
+
+    <edit-note *ngIf="createNote" 
+        [detailNote]="note" 
+        (onBack)="closeEdit($event)" 
+        (onEditNote)="createNoteRecord($event)"></edit-note>
 </div>
