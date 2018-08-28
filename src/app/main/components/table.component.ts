@@ -28,7 +28,7 @@ export class TableComponent implements OnChanges {
     @Output() onDeleteRecord = new EventEmitter();
     @Output() onEditRecord = new EventEmitter();
 
-    private note: Notes;
+    note: Notes;
     private editNote: boolean = false;
     private viewNote: Boolean = false;
 
@@ -38,7 +38,7 @@ export class TableComponent implements OnChanges {
     }
 
     /**
-     * This method close the detail.
+     * This method close the detail modal.
      * @param event - The event of click.
      */
     public closeDetail(e): void {
@@ -47,18 +47,7 @@ export class TableComponent implements OnChanges {
     }
 
     /**
-     * This method emit the record to is detail.
-     * @param event - The event of click.
-     * @param record - The record to emit.
-     */
-    public detailRecord(e, record?: Notes): void {
-        e.preventDefault();
-        this.note = record;
-        this.viewNote = !this.viewNote;
-    }
-
-    /**
-     * This method close the edit.
+     * This method close the edit modal.
      * @param event - The event of click.
      */
     public closeEdit(e): void {
@@ -67,9 +56,20 @@ export class TableComponent implements OnChanges {
     }
 
     /**
-     * This method emit the record to is detail.
+     * This method set note to view in detail.
      * @param event - The event of click.
-     * @param record - The record to emit.
+     * @param record - The note to view.
+     */
+    public detailRecord(e, record?: Notes): void {
+        e.preventDefault();
+        this.note = record;
+        this.viewNote = !this.viewNote;
+    }
+
+    /**
+     * This method set note to edit.
+     * @param event - The event of click.
+     * @param record - The record to edit.
      */
     public editRecord(e, record?: Notes): void {
         e.preventDefault();
@@ -78,20 +78,20 @@ export class TableComponent implements OnChanges {
     }
 
     /**
-     * This method emit the record to be deleted.
+     * This method emit the event to delete record.
      * @param record - The record to emit.
      */
     public deleteNote(record): void {
-        this.onDeleteRecord.emit(record);
         this.viewNote = !this.viewNote;
+        this.onDeleteRecord.emit(record);
     }
 
     /**
-     * This method emit the record to be edit.
+     * This method emit the event to edit record.
      * @param record - The record to emit.
      */
     public editNoteRecord(record): void {
-        this.onEditRecord.emit(record);
         this.editNote = !this.editNote;
+        this.onEditRecord.emit(record);
     }
 }

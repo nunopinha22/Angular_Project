@@ -1,4 +1,7 @@
 <div>
     <span>Search term</span>
-    <input type="text" #searchText placeholder="find..." (keyup)="filterText($event, searchText.value)" />
+    <input type="text" 
+        class="n_title" 
+        #searchText 
+        placeholder="find..." (keyup)="filterText($event, searchText.value)" />
 </div>
